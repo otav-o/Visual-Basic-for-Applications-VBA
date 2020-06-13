@@ -1,0 +1,88 @@
+Conteúdo:
+- Estrutura de repetição Do While ... loop;
+- Criar uma soma com essa estrutura. 
+
+Obs: =aleatórioentre()
+- Copiar e colar somente como valores (elimina as fórmulas)
+
+Obs.2: O botão que o professor usa é o ActiveX
+- Dar dois cliques nele abre o ambiente do código
+- Em propriedades (f4) -> caption: mudar o texto exibido (é diferente do nome do botão, que está em Name)
+
+Obs.3: Parar um código de loop infinito (não garantido)
+- ctrl + break
+- Usar o debug (f8) não causa problemas, pois o loop só roda 1 ciclo por clique
+
+Dúvidas
+- Diferença entre ActiveSheet.Range("A1")[.Value] e ActiveCell.Value e Range("A1").Value
+
+Lembretes: O comando Dim dimensiona uma variável.
+DO WHILE (Faça enquanto)
+
+>>> Do While ActiveCell.Value <> ""
+        Resultado = Resultado + ActiveCell.Value
+        ActiveCell.Offset(1, 0).Select 'pula para a próxima célula
+    Loop
+
+    ActiveCell.Value = "O resultado é: " & Resultado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Código {
+
+
+Private Sub CommandButton1_Click()
+
+Dim Resultado   As Long
+Dim W           As Worksheet
+
+'Iniciar a variável W
+Set W = Sheets("Plan1")
+W.Select
+
+Resultado = 0
+
+W.Range("A1").Select 'Não precisava explicitar a planilha, pois ela
+'já estava ativa. Mas talvez seja um comando importante no futuro.
+
+'Estrutura de repetição Do While ... Loop
+
+Do While ActiveCell.Value <> ""
+    Resultado = Resultado + ActiveCell.Value
+    ActiveCell.Offset(1, 0).Select 'pula para a próxima célula
+    
+Loop
+
+ActiveCell.Value = "O resultado é: " & Resultado
+
+MsgBox "O resultado do somatório é " & Resultado & "!"
+'como toda concatenação, preciso dar um espaço no texto anterior
+
+End Sub
+
+}

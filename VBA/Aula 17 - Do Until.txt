@@ -1,0 +1,76 @@
+Conteúdo:
+- Do Until... Loop
+- Criar uma somatória com a estrutura de repetição
+
+DO UNTIL ("Faça até que")
+- Funciona como uma espécie de acumulador, quando atinge determinado valor, para de executar.
+
+>>> Do Until Resultado >= 4000
+	Resultado = Resultado + ActiveCell.Value
+        ActiveCell.Offset(1, 0).Select
+    Loop
+
+- Com a hipótese/ validador no loop, tem-se a certeza de que o código de repetição executará pelo menos uma vez, pois não haverá qualquer teste na primeira ocorrência. 
+
+Do Until... Loop
+Do... Loop Until
+
+>>> Do
+	Resultado = Resultado + ActiveCell.Value
+	ActiveCell.Offset(1, 0).Select
+    Loop Until Resultado >= 4000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Código da aula {
+
+Option Explicit
+
+Private Sub btExecuta_Click()
+Dim W           As Worksheet
+Dim Resultado   As Long
+
+Set W = Sheets("Plan1")
+W.Select
+
+W.Range("A2").Select
+
+Resultado = 0
+
+Do  'não é "faça enquanto", e sim "faça até que"
+    Resultado = Resultado + ActiveCell.Value
+    
+    'exibe o resultado parcial na célula direita à ativa
+    ActiveCell.Offset(0, 1).Value = Resultado
+    
+    'seleciona a célula de baixo
+    ActiveCell.Offset(1, 0).Select
+Loop Until Resultado >= 4000
+
+MsgBox Resultado
+ActiveCell.Offset(-1, 1) = "A soma até aqui deu " & Resultado
+
+Do While ActiveCell <> ""
+    Resultado = Resultado + ActiveCell.Value
+    ActiveCell.Offset(1, 0).Select 'Sem o ActiveCell, dá um erro na primeira
+                                   'linha do programa, o que é assustador,
+                                   'pois não mostra onde está o erro.
+Loop
+
+ActiveCell.Value = "O resultado deu " & Resultado
+
+End Sub
+}

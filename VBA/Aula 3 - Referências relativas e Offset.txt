@@ -1,0 +1,15 @@
+Aula 3 - Conteúdo
+Formas diferentes de gravar uma macro
+   Referências relativas
+   Referências absolutas
+VBA: método Offset
+   Como deslocar o cursor na planilha utilizando a instrução ActiveCell.Offset
+
+
+ActiveCell.Offset(2, 2).Select
+ActiveCell.Offset(-1, 0).Select
+ActiveCell.Offset(1, 0).Select
+
+'Offset([posiçãoLinha], [posiçãoColuna])
+'negativo:      sobe        esquerda
+'positivo:      desce       direita

@@ -1,0 +1,86 @@
+Conteúdo:
+- Do While ... Loop
+- Utilizando o Do While em uma ordem inversa;
+- Como definir a última célula de uma coluna com variável;
+- O uso do OPTION EXPLICIT para forçar declaração de variáveis;
+
+Exemplo de uso do Do While inverso: caso se precise apagar algumas linhas de um relatório automaticamente. Um caso: sempre que encontrar um cabeçalho ou rodapé, o programa vai apagá-lo.
+
+Name de um objeto:
+- Em propriedades (f4), colocar um nome que facilite a identificação pela aba superior do VBA; o caption é outra coisa, é o texto exibido ao usuário.
+- Ex: nomear um botão com btExecuta, sendo a caption dele Executa (evita que vc se perca)
+- Apagar o código antes
+
+Option Explicit
+- Na aba "geral" de objetos; esse comando deve estar na parte superior do código; Seção "declaração".
+- Usado para que todas as variáveis utilizadas no programa sejam declaradas. Não tem como executar a macro sem dimensionar todas as variáveis utilizadas, é obrigatório.
+- Observe que a sua Sub continua embaixo, dividindo o mesmo espaço da tela.
+
+Uso do Option Explicit
+- Impede que se declare uma variável sem dimensioná-la antes (declaração implícita);
+- [Confirmar] Assim como no Python, se eu declarei uma variável como texto, eu não consigo atribuir um número a ela, pois o programa a dimensionou como string;
+
+
+
+
+- Também: toda vez que for definir uma variável com um range, deve-se utilizar o Set
+>>> Set Ultcel = W.Range("A1048576").End(xlUp)
+
+
+
+
+
+
+
+
+
+
+Código 
+{
+
+Option Explicit
+
+Private Sub btExecuta_Click()
+
+Dim W           As Worksheet
+Dim Ultcel      As Range
+Dim Resultado   As Long
+
+'Inicialização das variáveis
+
+Set W = Sheets("Plan1")
+Resultado = 0   'não foi dimensionado e deu erro
+
+'Seleciona a planilha
+
+W.Select
+
+Set Ultcel = Range("A1048576").End(xlUp) 'Precisa do Set
+
+Ultcel.Select
+
+'Subir a linha e somar; exclui a linha 1 pois é o título
+
+Do While ActiveCell.Row >= 2
+
+    Resultado = Resultado + ActiveCell.Value
+    ActiveCell.Offset(-1, 0).Select 'Sem a instrução select, essa linha dá
+                                    'erro
+
+    
+Loop
+MsgBox Resultado
+
+'Range("A21").Value = "A soma das linhas anteriores vale " & Resultado
+''Não precisei usar Set pois não se tratava de variável = Range
+
+Ultcel.Offset(1, 0).Value = "A soma das linhas anteriores vale " & Resultado
+
+
+End Sub
+
+'Usar a variável W é interessante caso se precise alterar a planilha
+'mas penso que a opção localizar e substituir seria útil nesse caso.
+'Ainda não entendo o motivo de usar isso.
+
+}

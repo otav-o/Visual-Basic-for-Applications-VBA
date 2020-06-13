@@ -1,0 +1,84 @@
+Conteúdo
+- Estrutura de repetição For... Next;
+- Criando um numerador de linhas (com limitador no código);
+- Criando um numerador de linhas (com limitador definido na planilha).
+
+Obs.: Há na planilha, na guia desenvolvedor, o botão propriedades.
+Dá para editar antes de entrar no ambiente VBA (clicando duas vezes no objeto), e de quebra não precisa apagar o código do Name antigo.
+
+Obs.2: O que está acima do Sub de uma macro está fora dela. Logo, basta colocar o Option Explicit acima que já vai entrar no geral.
+
+FOR TO NEXT
+- Limite fixo de repetição;
+>>> For Cont = 0 To 20
+	ActiveCell.Value = Cont
+	ActiveCell.Offset(1, 0).Select
+    Next
+
+>>> For x To y
+
+    Next
+
+CLEARCONTENTS
+>>> Range("A:A").EntireColumn.ClearContents
+
+- Limpa a coluna A inteira
+- Dúvidas: 
+-- Por que usar o .EntireColumn?
+Na realidade não vi diferença neste caso. O resultado é o mesmo sem ele.
+
+-- Qual a diferença entre o .Delete e o .ClearContents?
+O comando .Delete, na linha de código acima, iria excluir a coluna A e trazer as demais para a esquerda. Equivale ao ctrl -
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Código {
+Option Explicit
+
+Private Sub btExecuta_Click()
+
+Dim W       As Worksheet
+Dim Cont    As Integer
+Dim N       As Integer
+
+Set W = Sheets("Plan1")
+W.Select
+W.Range("A1").Select
+
+N = W.Range("C7").Value
+N = Range("C7").Value
+'N = ActiveSheet.Cell(7, 3).Value
+'N = Cell(7, 3).Value
+'N = W.Cell(7, 3).Value
+'Até hoje não sei quais funcionam ou não.
+
+For Cont = 1 To N
+
+    ActiveCell.Value = Cont
+    ActiveCell.Offset(1, 0).Select 'Sem isso ele continua na mesma linha
+    'A variável entre o For e o To é o contador, e é ela que varia no loop
+
+Next
+
+'Limpar para a próxima execução
+
+W.Range("A:A").EntireColumn.ClearContents
+'É diferente do .Delete
+'Por que devo escrever o .EntireColumn?
+
+End Sub
+}

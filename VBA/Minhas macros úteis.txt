@@ -1,0 +1,81 @@
+
+
+Private Sub btConsolidarDados_Click()
+Sheets("Semanas").Select
+
+For L = 2 To 7
+    For C = 10 To 16
+        Cells(L, C).Select
+        Soma = Soma + ActiveCell.Value
+    Next
+    ActiveCell.Offset(0, 1).Value = ActiveCell.Offset(0, 1) + Soma
+    Soma = 0
+Next
+Range("J2:P7").ClearContents
+
+End Sub
+
+
+
+==================================================
+
+
+
+Private Sub btSomar_Click()
+Sheets("Semanas").Select
+
+' Somar os dois valores
+
+s = Range("C22").Value + Range("C24").Value
+
+' Se a soma der diferente de zero
+
+If s <> 0 Then
+    For Each c In Range("A17:C18")  'analisar o campo de colagem
+    
+        If c = "" Then  'se achar uma célula vazia
+            c.Value = s 'colar a soma nela
+            Range("A22:B22,B24").ClearContents
+            End 'e finalizar programa
+        End If
+        
+    Next    'depois de analisar e não achar uma célula vazia
+    Var = Range("B16").Value   'condensar as células em uma
+    Range("A17:C18").ClearContents
+    Range("A18").Value = Var
+    Range("A19").Value = s
+    
+End If
+
+End Sub
+=============================
+
+Private Sub CommandButton1_Click()  'subir soma
+
+Sheets("Semanas").Select
+
+' Achando o lugar em que os dados serão colados
+
+If Range("C16") = "f" Then
+    coluna = 1
+ElseIf Range("C16") = "l" Then
+    coluna = 2
+ElseIf Range("C16") = "c" Then
+    coluna = 3
+Else
+    Range("C16").Value = "???"
+    End     'encerra o código inteiro
+End If
+
+' Definindo o que será colado
+
+resultado = Range("B16").Value
+
+
+' Colar os dados somando aos anteriores
+
+Cells(14, coluna).Value = Cells(14, coluna).Value + resultado
+
+Range("A17:C18").Value = ""
+        
+End Sub

@@ -1,0 +1,71 @@
+14:16 23/05/2020
+Observações
+
+- Gravar macro: "Exibir" -> "Macros" -> "Gravar Macro"
+- "Exibir macros" -> clica em uma -> "editar" (acessar o código)
+- Macro é tudo que está entre o Sub e o End Sub.
+- Sempre começar o código deixando expresso a qual planilha se está atribuindo a macro.
+- Atenção com o Range("XN").Selectdo início do código
+- Vá em "Ferramentas" -> "opções" -> "editor" -> "autoverificar sintaxe" e desative isso
+
+Comandos principais:
+1 - Selecionar uma planilha
+>>> Sheets("nome_planilha").Select
+>>> p.Select
+
+2 - Selecionar uma célula
+>>> Range("XN").Select
+>>> Cells(l, c).Select
+
+3 - Selecionar um conjunto de células
+>>> Range("XN:X1N1").Select
+>>> Range(Cells(l, c), Cells(l1, c1))
+
+4 - Copiar
+>>> Selection.Copy
+>>> Range(...).Copy
+
+5 - Definir o valor de uma célula
+>>> Range("XN").Value = "valor"
+	- Não se usa aspas para atribuir números
+>>> c.Value = 5
+	- no caso de uma variável representar uma célula, como em um For Each
+
+6 - Uma variável receber o valor de uma célula:
+>>> z = Range("XN").Value
+
+7 - Colar
+>>> ActiveSheet.Paste
+
+8 - Comentário no VBA: um simples apóstofro
+>>> 'ola
+	- Comentar várias linhas: Selecionar (o código) -> "exibir" -> "barra de ferramentas" -> "editar" -> "comentar bloco"
+
+9- "Para cada planilha na pasta de trabalho"
+
+Sub nomeMacro()
+    For Each p In ThisWorkbook.Sheets
+        If p.Name <> "Introdução Then
+            Sheets(p.Name).Select
+            Range("H5").Value = "oi"
+        End If
+    Next
+End Sub
+
+
+Estruturas:
+a) IF
+>>> If [comparação] Then
+        [código se comparação == True]
+    Else
+	[código se comparação == False]
+    End If
+
+b) FOR EACH
+>>> For Each [variável] In [intervalo, range]
+	[...]
+    Next
+	- Next finaliza o bloco, como se fosse um end
+
+
+== Se vc vai levar esses códigos consigo, eles precisam estar bem documentados com comentários, para facilitar a visualização e a adaptação a diferentes tarefas.

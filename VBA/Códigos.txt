@@ -1,0 +1,54 @@
+Sub inserirRegistros()
+'
+' inserirRegistros Macro
+'
+
+'
+Application.ScreenUpdating = False
+    Range("G8").Value = ""
+    Range("B5:G5").Select
+    Selection.Copy
+    Sheets("Clientes").Select
+    
+    Range("A1048576").Select
+    Selection.End(xlUp).Select
+    ActiveCell.Offset(1, 0).Select
+    ActiveSheet.Paste
+    
+    Sheets("Cadastro 1").Select
+    Range("B5:G5").Select
+    Application.CutCopyMode = False
+    Selection.ClearContents
+    Range("G8").Select
+   ' ActiveCell.FormulaR1C1 = "Gravação ok"
+   ' Range("B5").Select
+    
+    MsgBox "Registrado com sucesso!", vbOKOnly, "Processo concluído"
+    
+Application.ScreenUpdating = True
+
+End Sub
+
+
+
+
+Sub Botão1_Clique()
+
+Dim vCelula1 As String
+Dim vCelula2 As Integer
+Dim vCelula3 As Long
+Dim vCelula4 As Boolean
+
+vCelula1 = "Otávio"
+vCelula2 = True
+vCelula4 = False
+vCelula3 = ActiveSheet.Range("A5").Value
+
+ActiveSheet.Range("A1").Value = vCelula2
+Range("A2").Value = vCelula4
+
+'Concatenação no MSGBOX (&&)
+
+MsgBox vCelula1 & "-" & vCelula4
+
+End Sub

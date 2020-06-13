@@ -1,0 +1,49 @@
+Conteúdo
+- Como utilizar critérios nas estruturas de repetição;
+- Função If 
+-- Criando uma somatória para números positivos 
+-- Criando uma somatória para números negativos
+- Função If... Then... Else... End If
+
+& Chr(13) &
+- Quebra de linha na concatenação. 
+- Ce aga erre (treze)
+
+>>> If [hipótese] Then
+	[código]
+    ElseIf [hipótese2] Then
+	[código2]
+    Else [hipótese3]
+	[código3]
+    End If
+        
+
+
+Código {
+Private Sub btExecuta_Click()
+
+Dim W       As Worksheet
+Dim Ultcel  As Range
+Dim Resultado As Long
+Dim ResultadoNeg As Long
+
+Set W = Sheets("Plan1")
+W.Select
+
+W.Range("A2").Select
+
+Do While ActiveCell <> ""
+    If ActiveCell.Value > 0 Then
+        Resultado = Resultado + ActiveCell.Value
+    Else
+        ResultadoNeg = ResultadoNeg + ActiveCell.Value
+    End If
+    ActiveCell.Offset(1, 0).Select
+    
+Loop
+MsgBox "A soma dos números positivos é " & Resultado & Chr(13) & "A soma dos negativos dá: " & ResultadoNeg
+'Chr(13) equivale ao \n do Python
+
+End Sub
+}
+

@@ -1,0 +1,68 @@
+Conteúdo
+- Utilizando variáveis;
+- Dimensionando variáveis (DIM)
+- Tipos Integer/ Long/ Worksheet/ Boolean
+- Atribuindo variáveis com o comando SET;
+- Operações matemáricas com variáveis;
+- Exibir conteúdo de variáveis com o comando MSGBOX;
+- Como depurar o código de programação. 
+
+Dúvidas: a) Para que serve o DIM se eu posso inicializar variáveis e usá-las sem esse recurso? b) Quais objetos exigem o uso do Set?
+
+Código {
+Sub Botão1_Clique()
+
+Dim v1 As Integer
+Dim v2 As Integer
+Dim v3 As Integer
+Dim v4 As Integer
+Dim Result As Long
+Dim W As Worksheet 'inicializar essa variável e depois mudar a planilha a qual ela se refere
+
+Dim v5 As Date
+
+Set W = Sheets("Plan1") 'não usei o set e deu erro
+W.Select
+v1 = W.Range("A1")  'por que não usa o .Value??
+v2 = W.Range("A2")
+v3 = W.Range("A3")
+v4 = W.Range("A4")
+v5 = Date
+
+v6 = Date   'não inicializei (dimensionei) e funcionou
+MsgBox v6
+
+Result = v1 + v2
+MsgBox Result
+
+Result = v3 + v4
+MsgBox Result
+
+Result = v1 + (v2 * v3 * v4)
+MsgBox Result
+
+resposta = v1 > v2 'funcionou sem dimensionar a variável! então para que serve o dim?
+
+MsgBox resposta
+End Sub
+}
+
+DIM:
+>>> Dim W as Worksheet
+- Worksheet é um tipo de variável
+
+SET:
+>>> Set W = Sheets("Plan1") 
+e não: W = Sheets("Plan1")
+- Também: toda vez que for definir uma variável com um range, deve-se utilizar o Set
+>>> Set Ultcel = W.Range("A1048576").End(xlUp)
+____
+Debugar: tecla f8
+	 se quiser voltar a uma linha anterior, basta arrastar a seta para cima.
+Executar tudo: f5
+Breakpoint: f9
+
+Public Sub
+- Variáveis tornam-se públicas e podem ser usadas em outras macros e módulos, não fica restrite ao Sub e End Sub. (Assunto para outra aula)
+
+21:05 28/05/2020

@@ -1,0 +1,43 @@
+Sub compilação()
+linha = 1
+linha_fim = Range("A1").End(xlDown).Row
+
+Range("c2:c" & linha_fim).Copy
+Range("J1").PasteSpecial
+Application.CutCopyMode = False
+ActiveSheet.Range("$J$1:$J$" & linha_fim).RemoveDuplicates Columns:=1, Header:= _
+    xlNo
+    
+linha_fim = Range("j1").End(xlDown).Row
+
+While linha <= linha_fim
+    Sheets.Add After:=ActiveSheet
+    ActiveSheet.Name = Sheets("Planilha1").Cells(linha, 10)
+    
+    Sheets("Planilha1").Range("A1:C1").Copy
+    ActiveSheet.Range("A1").PasteSpecial
+    
+    linha = linha + 1
+Wend
+
+Sheets("Planilha1").Range("J:J").Clear
+linha = 2
+
+While Sheets("Planilha1").Cells(linha, 1) <> ""
+    Sheets("Planilha1").Range("A" & linha & ":c" & linha).Copy
+    bairro = Sheets("Planilha1").Cells(linha, 3)
+    Sheets(bairro).Select
+    Range("A10000").End(xlUp).Offset(1, 0).PasteSpecial
+    Application.CutCopyMode = False
+    Sheets("Planilha1").Select
+    linha = linha + 1
+    
+Wend
+
+For Each aba In ThisWorkbook.Sheets
+    aba.Columns("A:C").AutoFit
+Next
+End Sub
+
+
+
